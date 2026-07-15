@@ -49,8 +49,14 @@ jobs:
         with:
           dotnet-version: 9.0.x
 
+      - name: Restore
+        run: dotnet restore src/HetznerCloud/HetznerCloud.csproj
+
+      - name: Build
+        run: dotnet build src/HetznerCloud/HetznerCloud.csproj -c Release
+
       - name: Pack
-        run: dotnet pack src/HetznerCloud/HetznerCloud.csproj -c Release
+        run: dotnet pack src/HetznerCloud/HetznerCloud.csproj -c Release --no-build
 
       - name: Upload NuGet package
         uses: actions/upload-artifact@v4
