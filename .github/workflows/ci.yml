@@ -5,6 +5,8 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -63,3 +65,32 @@ jobs:
         with:
           name: nuget-package
           path: '**/*.nupkg'
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    environment: nuget
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Restore
+        run: dotnet restore src/HetznerCloud/HetznerCloud.csproj
+
+      - name: Build
+        run: dotnet build src/HetznerCloud/HetznerCloud.csproj -c Release
+
+      - name: Pack
+        run: dotnet pack src/HetznerCloud/HetznerCloud.csproj -c Release --no-build
+
+      - name: Push to NuGet
+        run: dotnet nuget push "**/*.nupkg" --source "https://api.nuget.org/v3/index.json"
