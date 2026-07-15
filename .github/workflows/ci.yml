@@ -94,4 +94,4 @@ jobs:
         run: dotnet pack src/HetznerCloud/HetznerCloud.csproj -c Release --no-build
 
       - name: Push to NuGet
-        run: dotnet nuget push "**/*.nupkg" --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+        run: dotnet nuget push "**/*.nupkg" --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate --no-symbols
