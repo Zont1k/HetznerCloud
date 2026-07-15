@@ -2,8 +2,10 @@
 
 A comprehensive, production-ready .NET client library for the [Hetzner Cloud API](https://docs.hetzner.cloud), modeled after the official [hcloud-go](https://github.com/hetznercloud/hcloud-go) and [hcloud-python](https://github.com/hetznercloud/hcloud-python) libraries.
 
-[![Build](https://img.shields.io/badge/build-passing-brightgreen)]()
-[![.NET](https://img.shields.io/badge/.NET-8.0%20%7C%209.0-blueviolet)]()
+[![CI](https://github.com/Zont1k/HetznerCloud/actions/workflows/ci.yml/badge.svg)](https://github.com/Zont1k/HetznerCloud/actions/workflows/ci.yml)
+[![NuGet](https://img.shields.io/nuget/v/HetznerCloud.svg)](https://www.nuget.org/packages/HetznerCloud/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/HetznerCloud.svg)](https://www.nuget.org/packages/HetznerCloud/)
+[![.NET](https://img.shields.io/badge/.NET-8.0%20%7C%209.0-blueviolet)](https://dotnet.microsoft.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Features
