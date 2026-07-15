@@ -1,0 +1,68 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.cs]
+indent_style = space
+indent_size = 4
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_between_query_expression_clauses = true
+csharp_prefer_braces = true
+csharp_indent_switch_labels = true
+csharp_space_after_cast = true
+csharp_space_between_empty_square_brackets = false
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_parentheses = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_between_method_declaration_name_and_open_parenthesis = false
+csharp_space_between_method_call_name_and_open_parenthesis = false
+
+# Modern C# features
+csharp_style_var_for_built_in_types = true
+csharp_style_var_when_type_is_apparent = true
+csharp_style_pattern_matching_over_is_with_cast_check = true
+csharp_style_pattern_matching_over_as_with_null_check = true
+csharp_prefer_is_null_check_over_reference_equality_method = true
+csharp_prefer_simple_default_expression = true
+csharp_prefer_index_from_end_operator = true
+csharp_prefer_range_operator = true
+
+# Expression-bodied members
+csharp_style_expression_bodied_methods = true
+csharp_style_expression_bodied_properties = true
+csharp_style_expression_bodied_operators = true
+csharp_style_expression_bodied_accessors = true
+csharp_style_expression_bodied_constructors = true
+csharp_style_expression_bodied_lambda_expressions = true
+
+# var preferences
+csharp_style_var_elsewhere = true:suggestion
+
+# Null checking
+csharp_style_null_checking = true:suggestion
+
+[*.{csproj,props,targets,targets}]
+indent_style = space
+indent_size = 2
+
+[*.{json,yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{editorconfig}]
+indent_style = space
+indent_size = 2
