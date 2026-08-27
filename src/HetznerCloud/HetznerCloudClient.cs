@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using HetznerCloud.Authentication;
 using HetznerCloud.Clients;
+using HetznerCloud.Core;
 using HetznerCloud.Exceptions;
 using HetznerCloud.Models;
 using HetznerCloud.Pagination;
@@ -64,7 +65,7 @@ public class HetznerCloudClient : IDisposable
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            Converters = { new JsonStringEnumConverter() }
+            Converters = { new JsonStringEnumConverter(), new DecimalStringConverter() }
         };
 
         _retryPolicy = CreateRetryPolicy();
@@ -116,26 +117,32 @@ public class HetznerCloudClient : IDisposable
 
     internal async Task<T> GetAsync<T>(string path, CancellationToken cancellationToken = default)
     {
-        var response = await ExecuteAsync(() => _httpClient.GetAsync(path, cancellationToken), cancellationToken);
+        var response = await ExecuteAsync(() => _httpClient.GetAsync(BuildRequestUri(path), cancellationToken), cancellationToken);
         return await HandleResponse<T>(response, cancellationToken);
     }
 
     internal async Task<T> PostAsync<T, TRequest>(string path, TRequest request, CancellationToken cancellationToken = default)
     {
-        var response = await ExecuteAsync(() => _httpClient.PostAsJsonAsync(path, request, _jsonOptions, cancellationToken), cancellationToken);
+        var response = await ExecuteAsync(() => _httpClient.PostAsJsonAsync(BuildRequestUri(path), request, _jsonOptions, cancellationToken), cancellationToken);
         return await HandleResponse<T>(response, cancellationToken);
     }
 
     internal async Task<T> PutAsync<T, TRequest>(string path, TRequest request, CancellationToken cancellationToken = default)
     {
-        var response = await ExecuteAsync(() => _httpClient.PutAsJsonAsync(path, request, _jsonOptions, cancellationToken), cancellationToken);
+        var response = await ExecuteAsync(() => _httpClient.PutAsJsonAsync(BuildRequestUri(path), request, _jsonOptions, cancellationToken), cancellationToken);
         return await HandleResponse<T>(response, cancellationToken);
     }
 
     internal async Task<T> DeleteAsync<T>(string path, CancellationToken cancellationToken = default)
     {
-        var response = await ExecuteAsync(() => _httpClient.DeleteAsync(path, cancellationToken), cancellationToken);
+        var response = await ExecuteAsync(() => _httpClient.DeleteAsync(BuildRequestUri(path), cancellationToken), cancellationToken);
         return await HandleResponse<T>(response, cancellationToken);
+    }
+
+    private Uri BuildRequestUri(string path)
+    {
+        var baseUri = new Uri(_options.BaseUrl.TrimEnd('/') + "/");
+        return new Uri(baseUri, path.TrimStart('/'));
     }
 
     internal async Task<HttpResponseMessage> ExecuteAsync(Func<Task<HttpResponseMessage>> action, CancellationToken cancellationToken)

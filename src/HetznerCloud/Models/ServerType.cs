@@ -88,7 +88,7 @@ public class Image
     public string Description { get; set; } = string.Empty;
 
     [JsonPropertyName("image_size")]
-    public double ImageSize { get; set; }
+    public double? ImageSize { get; set; }
 
     [JsonPropertyName("disk_size")]
     public int DiskSize { get; set; }

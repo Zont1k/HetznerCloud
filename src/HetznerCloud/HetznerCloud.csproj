@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>HetznerCloud</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.0.1</PackageVersion>
     <Authors>Hetzner Cloud Community</Authors>
     <Description>A .NET library for the Hetzner Cloud API</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

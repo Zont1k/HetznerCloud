@@ -141,7 +141,7 @@ public class Ipv4Network
     public bool Blocked { get; set; }
 
     [JsonPropertyName("dns_ptr")]
-    public List<DnsPtr> DnsPtr { get; set; } = [];
+    public string? DnsPtr { get; set; }
 }
 
 public class Ipv6Network
